@@ -9,6 +9,26 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+
+from app.database import Base
+from app.models import apartamento, condominio, morador, ocorrencia, rivalidade  # noqa: F401
+
+
+@pytest.fixture
+async def async_session():
+    """Sessão real conectada a um SQLite em memória, para testes de model."""
+    engine = create_async_engine("sqlite+aiosqlite:///:memory:", echo=False)
+
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+    session_maker = async_sessionmaker(engine, expire_on_commit=False)
+
+    async with session_maker() as session:
+        yield session
+
+    await engine.dispose()
 
 
 @pytest.fixture

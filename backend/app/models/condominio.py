@@ -29,5 +29,5 @@ class Condominio(Base):
     )
 
     apartamentos: Mapped[list["Apartamento"]] = relationship(
-        "Apartamento", back_populates="condominio"
+        "Apartamento", back_populates="condominio", lazy="selectin"
     )

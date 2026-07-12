@@ -179,11 +179,11 @@ async def test_unique_constraint_apartamento(async_session):
     async_session.add(cond)
     await async_session.flush()
 
-    apt1 = Apartamento(numero="1", bloco="A", condominio_id=cond.id)
+    apt1 = Apartamento(numero="1", bloco="A", torre="1", condominio_id=cond.id)
     async_session.add(apt1)
     await async_session.flush()
 
-    apt2 = Apartamento(numero="1", bloco="A", condominio_id=cond.id)
+    apt2 = Apartamento(numero="1", bloco="A", torre="1", condominio_id=cond.id)
     async_session.add(apt2)
     with pytest.raises(Exception):
         await async_session.commit()
