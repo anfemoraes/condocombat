@@ -44,3 +44,4 @@ async def health_check():
 @app.get("/")
 async def root():
     return {"message": "CondoCombat API", "version": "0.1.0"}
+# trigger
