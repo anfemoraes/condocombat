@@ -38,7 +38,7 @@ services:
 
   # Frontend (Next.js)
   web:
-    image: your-dockerhub-username/condocombat-frontend:latest
+    image: anfemoraes/condocombat-frontend:latest
     container_name: condocombat-web
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000
